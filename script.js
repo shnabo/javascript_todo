@@ -103,17 +103,19 @@ createDeleteButton: function() {
       deleteButton.textContent = 'Delete';
       deleteButton.className = 'deleteButton';
       return deleteButton;
+    },
+    setUpEventListeners: function() {
+      todosUl = document.querySelector('ul');
+      todosUl.addEventListener('click', function(event){
+        console.log(event.target.parentNode.id);
+        // get the element that was clicked on
+        var elementClicked = event.target;
+        //check if element clicked is a createDeleteButton
+        if (elementClicked.className === 'deleteButton') {
+          handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
+        }
+      });
     }
-};
+  };
 
-todosUl = document.querySelector('ul');
-todosUl.addEventListener('click', function(event){
-  console.log(event.target.parentNode.id);
-  // get the element that was clicked on
-  var elementClicked = event.target;
-  //check if element clicked is a createDeleteButton
-  if (elementClicked.className === 'deleteButton') {
-    handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
-  }
-
-});
+view.setUpEventListeners();
